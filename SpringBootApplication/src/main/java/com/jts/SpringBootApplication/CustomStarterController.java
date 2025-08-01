@@ -1,5 +1,7 @@
 package com.jts.SpringBootApplication;
 
+
+
 import com.jts.starter.CustomRestClient;
 import com.jts.starter.Todo;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,7 @@ public class CustomStarterController {
 
     @GetMapping("/findALl")
     public List<Todo> findAll(){
+
         return restClient.findAll();
     }
     

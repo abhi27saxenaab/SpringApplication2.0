@@ -11,24 +11,25 @@ import org.springframework.web.client.RestClient;
 @EnableConfigurationProperties(CustomProperties.class)
 public class CustomPropertiesConfiguration {
 
-    private static final Logger log = LoggerFactory.getLogger(CustomPropertiesConfiguration.class);
+    Logger log = LoggerFactory.getLogger(CustomPropertiesConfiguration.class);
 
-    private CustomProperties properties;
+    CustomProperties properites;
 
-    public CustomPropertiesConfiguration(CustomProperties properties) {
-        log.info("Configuring starter with properties {}", properties);
-
-        this.properties = properties;
+    CustomPropertiesConfiguration(CustomProperties customProperties){
+        log.info("Conguring starter with properties, {}", customProperties);
+        this.properites = customProperties;
     }
-
     @Bean
     CustomRestClient customRestClient(RestClient restClient) {
         return new CustomRestClient(restClient);
     }
 
+
     @Bean("externalRestClient")
     RestClient restClient(RestClient.Builder builder) {
-        return builder.baseUrl(properties.baseUrl())
+        return builder.baseUrl(properites.baseUrl())
                 .build();
     }
+
+
 }
