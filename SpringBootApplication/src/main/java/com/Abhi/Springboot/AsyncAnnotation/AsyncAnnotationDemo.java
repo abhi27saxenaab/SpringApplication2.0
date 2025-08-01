@@ -9,14 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AsyncAnnotationDemo {
 
     public static void main(String[] args) {
-        @Autowired
-        OrderService orderService;
 
-        SpringApplication.run(AsyncAnnotationDemo.class, args);
-
-        orderService.OrderA();
-        orderService.OrderB();
-        orderService.OrderC();
 
     }
 }
