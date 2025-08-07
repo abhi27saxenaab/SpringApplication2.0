@@ -1,4 +1,4 @@
-package com.jts.SpringBootApplication.service;
+package com.BookStore.service;
 
 import com.BookStore.dto.BookRequestDTO;
 import com.BookStore.entity.Book;
