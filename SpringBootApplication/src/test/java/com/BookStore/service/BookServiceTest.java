@@ -20,11 +20,13 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class BookServiceTest {
 
-    @InjectMocks
-    private BookService bookService;
+
 
     @Mock
     private BookRepository bookRepository; //
+
+    @InjectMocks
+    private BookService bookService;
 
     @Test
     void saveBookShouldAddSuccessfully(){
@@ -41,11 +43,11 @@ public class BookServiceTest {
 
         // Define mock behavior
 //        when(bookRepository.save(any(Book.class))).thenReturn(expectedBook);
-
-
-
+//
+//
+//
 //        Book actualBook = bookService.saveBook(bookdto);
-
+//
 //        assertNotNull(actualBook);
 //        assertEquals("test", actualBook.getTitle());
 //        assertEquals("111", actualBook.getIsbn());
