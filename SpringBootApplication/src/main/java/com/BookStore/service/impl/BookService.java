@@ -13,14 +13,14 @@ import java.util.stream.Collectors;
 
 @Service
 public class BookService {
-    @Autowired
     private BookRepository bookRepository;
 
     private final ModelMapper modelMapper;
 
     @Autowired
-    public BookService(ModelMapper modelMapper) {
+    public BookService(BookRepository bookRepository,ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
+        this.bookRepository = bookRepository;
     }
 
     public List<BookResponseDTO> getAllBook(){

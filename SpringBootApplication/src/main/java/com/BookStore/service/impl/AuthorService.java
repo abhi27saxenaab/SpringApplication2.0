@@ -13,14 +13,14 @@ import java.util.stream.Collectors;
 
 @Service
 public class AuthorService {
-    @Autowired
-    private AuthorRepository authorRepository;
 
+    private AuthorRepository authorRepository;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public AuthorService(ModelMapper modelMapper) {
+    public AuthorService(AuthorRepository authorRepository, ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
+        this.authorRepository = authorRepository;
     }
 
     public List<AuthorResponseDTO> getAllAuthor(){
