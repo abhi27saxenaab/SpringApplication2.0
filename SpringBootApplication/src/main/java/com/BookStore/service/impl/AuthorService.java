@@ -53,4 +53,7 @@ public class AuthorService {
             return true;
         }
     }
+    public String giveMeString() {
+        return "Hello World!";
+    }
 }
