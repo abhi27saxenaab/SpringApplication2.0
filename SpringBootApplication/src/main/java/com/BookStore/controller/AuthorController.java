@@ -35,10 +35,10 @@ public class AuthorController {
 //    public List<AuthorResponseDTO> getAllAuthor(){
 //        return authorService.getAllAuthor();
 //    }
-//    @PostMapping
-//    public Author saveAuthor(@RequestBody AuthorRequestDTO author){
-//        return authorService.saveAuthor(author);
-//    }
+    @PostMapping
+    public Author saveAuthor(@RequestBody AuthorRequestDTO author){
+        return authorService.saveAuthor(author);
+    }
 //    @PostMapping("/{id}")
 //    public Boolean deleteAuthorById(@PathVariable Integer id){
 //        return authorService.deleteAuthorById(id);
