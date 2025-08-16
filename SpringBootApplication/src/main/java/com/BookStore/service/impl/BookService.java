@@ -3,6 +3,7 @@ import com.BookStore.dto.BookRequestDTO;
 import com.BookStore.dto.BookResponseDTO;
 import com.BookStore.entity.Author;
 import com.BookStore.entity.Book;
+import com.BookStore.entity.Genre;
 import com.BookStore.repository.BookRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,10 +54,14 @@ public class BookService {
         Author a1 =new Author();
         a1.setAuthor_id(b.getAuthorId());
 
+        Genre g1 =new Genre();
+        g1.setGenre_id(b.getGenre_id());
+
         b1.setTitle(b.getTitle());
         b1.setIsbn(b.getIsbn());
         b1.setAuthorId(a1);
         b1.setPublisher_id(b.getPublisher_id());
+        b1.setGenreId(g1);
         //b1.setGenre_id(b.getGenre_id());
         b1.setIsbn(b.getIsbn());
         b1.setPublication_date(b.getPublication_date());

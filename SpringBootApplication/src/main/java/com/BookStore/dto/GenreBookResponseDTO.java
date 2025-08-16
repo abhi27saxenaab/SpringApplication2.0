@@ -8,10 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class GenreBookResponseDTO {
     private String title;
     private int generic_id;
-    private int isbn;
-    public GenreBookResponseDTO(String title, int generic_id, int isbn) {
+    private String isbn;
+
+    private String genre_name;
+
+    public GenreBookResponseDTO(String title, int generic_id, String isbn, String genre_name) {
         this.title = title;
         this.generic_id = generic_id;
         this.isbn = isbn;
+        this.genre_name = genre_name;
     }
 }
