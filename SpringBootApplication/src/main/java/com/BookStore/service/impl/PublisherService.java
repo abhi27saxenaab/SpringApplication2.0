@@ -2,6 +2,7 @@ package com.BookStore.service.impl;
 import com.BookStore.dto.PublisherRequestDTO;
 import com.BookStore.dto.PublisherResponseDTO;
 import com.BookStore.entity.Publisher;
+import com.BookStore.exception.PublisherNotFound;
 import com.BookStore.repository.PublisherRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +39,10 @@ public class PublisherService {
         return bookdto;
 
     }
-    public PublisherResponseDTO getAllPublisherById(Integer id){
-        Optional<Publisher> book = bookRepository.findById(id);
-        PublisherResponseDTO bookdto = this.modelMapper.map(book, PublisherResponseDTO.class);
-        return bookdto;
+    public Publisher getAllPublisherById(Integer id){
+        Publisher book = bookRepository.findById(id).orElseThrow(()-> new PublisherNotFound("Not found: " + id));
+        //PublisherResponseDTO bookdto = this.modelMapper.map(book, PublisherResponseDTO.class);
+        return book;
     }
     public Publisher savePublisher(PublisherRequestDTO p){
         Publisher p1 = new Publisher();

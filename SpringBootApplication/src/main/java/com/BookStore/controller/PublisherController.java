@@ -3,12 +3,16 @@ package com.BookStore.controller;
 import com.BookStore.dto.PublisherRequestDTO;
 import com.BookStore.dto.PublisherResponseDTO;
 import com.BookStore.entity.Publisher;
+import com.BookStore.exception.ErrorResponse;
+import com.BookStore.exception.PublisherNotFound;
 import com.BookStore.service.impl.PublisherService;
+import io.micrometer.core.annotation.Timed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -21,23 +25,29 @@ public class PublisherController {
         this.publisherService=publisherService;
     }
     @GetMapping("/{id}")
-    public ResponseEntity<List<Publisher>> ListPublisherById(@PathVariable Integer id){
-        PublisherResponseDTO publishers=  this.publisherService.getAllPublisherById(id);
-        return new ResponseEntity(publishers, HttpStatus.OK);
+    public ResponseEntity<?> ListPublisherById(@PathVariable Integer id){
+
+            Publisher publishers = this.publisherService.getAllPublisherById(id);
+            return new ResponseEntity<>(publishers, HttpStatus.OK);
+
+
     }
+    @Timed
     @GetMapping
-    public ResponseEntity<List<Publisher>> ListAllPublisher(){
+    public List<PublisherResponseDTO>ListAllPublisher(){
         List<PublisherResponseDTO> publishers=  this.publisherService.getAllPublisher();
-        return new ResponseEntity(publishers, HttpStatus.OK);
+        return publishers;
     }
     @PostMapping
-    public ResponseEntity<Publisher> savePublisher(@RequestBody PublisherRequestDTO u){
+    public Publisher savePublisher(@RequestBody PublisherRequestDTO u){
         Publisher publisher=  this.publisherService.savePublisher(u);
-        return new ResponseEntity(publisher, HttpStatus.OK);
+        return publisher;
     }
     @DeleteMapping("/{id}")
     public Boolean DeletePublisherById(@PathVariable Integer id){
         Boolean isDeleted=  this.publisherService.deletePublisherById(id);
         return isDeleted;
     }
+
+
 }
