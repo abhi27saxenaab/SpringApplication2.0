@@ -1,5 +1,6 @@
 package com.BookStore.controller;
 
+import com.BookStore.dto.GenreBookResponseDTO;
 import com.BookStore.dto.GenreRequestDTO;
 import com.BookStore.dto.GenreResponseDTO;
 import com.BookStore.entity.Genre;
@@ -20,6 +21,12 @@ public class GenreController {
     public GenreController(GenreService GenreService){
         this.GenreService=GenreService;
     }
+    @GetMapping("/allbooks/{id}")
+    public ResponseEntity<List<Genre>> ListAllBooksGenreById(@PathVariable Integer id){
+        List<GenreBookResponseDTO> Genres=  this.GenreService.ListAllBooksGenreById(id);
+        return new ResponseEntity(Genres, HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<List<Genre>> ListGenreById(@PathVariable Integer id){
         GenreResponseDTO Genres=  this.GenreService.getAllGenreById(id);
