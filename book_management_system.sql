@@ -9,10 +9,7 @@ CREATE TABLE `authors` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`author_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
-
-
-
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `books`;
 CREATE TABLE `books` (
@@ -29,18 +26,15 @@ CREATE TABLE `books` (
   `description` text,
   `cover_image` varchar(255) DEFAULT NULL,
   `quantity_in_stock` int(11) DEFAULT '0',
-  `status` enum('available','checked_out','lost','damaged') DEFAULT 'available',
-  `bookcondition` enum('new','good','fair','poor') DEFAULT 'good',
+  `status` varchar(255) DEFAULT NULL,
+  `bookcondition` varchar(255) DEFAULT NULL,
   `acquisition_date` date DEFAULT NULL,
   `acquisition_price` decimal(10,2) DEFAULT NULL,
   `barcode` varchar(50) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`book_id`),
-  KEY `author_id` (`author_id`),
-  KEY `publisher_id` (`publisher_id`),
-  KEY `genre_id` (`genre_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`book_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 DROP TABLE IF EXISTS `genres`;
 CREATE TABLE `genres` (
   `genre_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -49,7 +43,7 @@ CREATE TABLE `genres` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`genre_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 DROP TABLE IF EXISTS `publishers`;
 CREATE TABLE `publishers` (
   `publisher_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -61,7 +55,7 @@ CREATE TABLE `publishers` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`publisher_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 DROP TABLE IF EXISTS `transactions`;
 CREATE TABLE `transactions` (
   `transaction_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -70,14 +64,14 @@ CREATE TABLE `transactions` (
   `checkout_date` datetime NOT NULL,
   `due_date` datetime NOT NULL,
   `return_date` datetime DEFAULT NULL,
-  `status` enum('checked_out','returned','overdue','lost') DEFAULT 'checked_out',
+  `status` varchar(50) DEFAULT NULL,
   `notes` text,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`transaction_id`),
   KEY `user_id` (`user_id`),
   KEY `book_id` (`book_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -89,10 +83,10 @@ CREATE TABLE `users` (
   `address` text,
   `date_of_birth` date DEFAULT NULL,
   `registration_date` date DEFAULT NULL,
-  `membership_type` enum('regular','premium','staff','admin') DEFAULT 'regular',
-  `status` enum('active','inactive','suspended') DEFAULT 'active',
+  `membership_type` varchar(100) NOT NULL,
+  `status` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
