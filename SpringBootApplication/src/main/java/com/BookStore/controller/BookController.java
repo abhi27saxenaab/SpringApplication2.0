@@ -28,7 +28,7 @@ public class BookController {
     public Book saveBook(@RequestBody BookRequestDTO book){
         return bookService.saveBook(book);
     }
-    @PostMapping("/{id}")
+    @DeleteMapping("/{id}")
     public Boolean deleteBookById(@PathVariable Integer id){
         return bookService.deleteBookById(id);
     }

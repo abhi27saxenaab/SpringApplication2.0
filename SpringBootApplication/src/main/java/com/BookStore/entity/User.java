@@ -7,16 +7,20 @@ import lombok.Setter;
 import java.util.Date;
 
 @Entity
-@Table(name="authors")
+@Table(name="users")
 @Setter
 @Getter
-public class Author {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int author_id;
+    private int user_id;
     private String first_name;
     private String last_name;
-    private String biography;
+    private String email;
+    private String phone;
+    private String address;
     private Date date_of_birth;
-    private Date date_of_death;
+    private Date registration_date;
+    private String membership_type;
+    private String status;
 }
