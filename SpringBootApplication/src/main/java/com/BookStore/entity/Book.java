@@ -1,5 +1,6 @@
 package com.BookStore.entity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -23,6 +24,7 @@ public class Book {
     @GeneratedValue(generator = "custom-id")
     @GenericGenerator(name="custom-id", strategy = "com.BookStore.util.CustomIdGenerator")
     private int bookId;
+    @Size(max = 2, message = "Field must not exceed 50 characters")
     private String title;
     @ManyToOne
     @JoinColumn(name = "author_id")
