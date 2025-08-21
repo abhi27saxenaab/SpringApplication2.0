@@ -91,8 +91,6 @@ CREATE TABLE `users` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
-
-
 create table bookview (
     id int(11) 	NOT NULL AUTO_INCREMENT,
     book_id int(11),
@@ -100,6 +98,24 @@ create table bookview (
     count int(11),
     PRIMARY KEY (id)
 )
-
 INSERT into bookview (book_id,user_id,count) values(1,5,1)
 
+CREATE TABLE BookRatings (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    book_id BIGINT UNSIGNED NOT NULL,
+    user_id BIGINT UNSIGNED NOT NULL,
+    rating TINYINT UNSIGNED NOT NULL CHECK (rating BETWEEN 1 AND 5),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP -- No default here
+);
+
+CREATE TABLE bookComments (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    book_id BIGINT UNSIGNED NOT NULL,
+    user_id BIGINT UNSIGNED NOT NULL,
+    comment_text TEXT NOT NULL,
+    parent_id BIGINT UNSIGNED NULL, -- For nested replies
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP
+
+);
