@@ -14,5 +14,6 @@ public interface BookService {
     Book saveBook(BookRequestDTO b);
     Boolean deleteBookById(Long id);
     Page<BookResponseDTO> getAllBookWithPaging(int page, int size);
+    List<BookResponseDTO> getAllBookWithAuthor(int id);
 
 }

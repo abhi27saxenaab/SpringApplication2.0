@@ -1,10 +1,14 @@
 package com.BookStore.service.impl;
 import com.BookStore.dto.BookRequestDTO;
 import com.BookStore.dto.BookResponseDTO;
+import com.BookStore.dto.BookviewDTO;
 import com.BookStore.entity.Author;
 import com.BookStore.entity.Book;
+import com.BookStore.entity.Bookview;
 import com.BookStore.entity.Genre;
+import com.BookStore.repository.AuthorRepository;
 import com.BookStore.repository.BookRepository;
+import com.BookStore.repository.BookviewRepositoty;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,12 +26,15 @@ import java.util.stream.Collectors;
 public class BookService {
     private BookRepository bookRepository;
 
+    private BookviewRepositoty bookviewRepositoty;
+
     private final ModelMapper modelMapper;
 
     @Autowired
-    public BookService(BookRepository bookRepository,ModelMapper modelMapper) {
+    public BookService(BookRepository bookRepository, BookviewRepositoty bookviewRepositoty, ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
         this.bookRepository = bookRepository;
+        this.bookviewRepositoty = bookviewRepositoty;
     }
     public Page<BookResponseDTO> getAllBookWithPaging(int page, int size) {
         // Create pageable request
@@ -110,5 +118,16 @@ public class BookService {
             bookRepository.deleteById(id);
             return true;
         }
+    }
+    public List<BookResponseDTO> getAllBookWithAuthor(Integer id){
+        List<Book> books =  bookRepository.findAll();
+        List<BookResponseDTO> bookdto = books.stream().map(book -> {
+            List<BookviewDTO> bookview = bookviewRepositoty.findBookView(book.getBookId());
+            String userView = bookview.stream().map(b->b.getFirst_name() + b.getLast_name()).distinct().collect(Collectors.joining(","));
+            BookResponseDTO bo = modelMapper.map(book,BookResponseDTO.class);
+            bo.setAuthorName1(userView);
+            return bo;
+        }).collect(Collectors.toList());
+        return bookdto;
     }
 }

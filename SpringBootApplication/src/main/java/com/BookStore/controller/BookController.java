@@ -16,6 +16,13 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
+
+
+    @GetMapping("/allbookwithauthors/{id}")
+    public List<BookResponseDTO> getAllBookWithAuthor(@PathVariable Integer id){
+        return bookService.getAllBookWithAuthor(id);
+    }
+
     @GetMapping("/{id}")
     public BookResponseDTO getAllBookById(@PathVariable Integer id){
         return bookService.getAllBookById(id);
@@ -38,4 +45,5 @@ public class BookController {
     public Boolean deleteBookById(@PathVariable Integer id){
         return bookService.deleteBookById(id);
     }
+
 }

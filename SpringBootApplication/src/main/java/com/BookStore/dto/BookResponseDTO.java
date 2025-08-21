@@ -26,4 +26,6 @@ public class BookResponseDTO {
     private String barcode;
     private String authorName;
     private String genreName;
+
+    private String authorName1;
 }
